@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapp123.MainActivity
 import com.example.myapp123.R
 import com.example.myapp123.model.UserData
 
@@ -19,7 +20,9 @@ class UserAdapter(val c:Context,val userList:ArrayList<UserData>):RecyclerView.A
         init {
             name = v.findViewById<TextView>(R.id.mTitle)
             mMenus = v.findViewById(R.id.mMenus)
-            mMenus.setOnClickListener { popupMenus(it) }
+            mMenus.setOnClickListener {
+                popupMenus(it)
+            }
         }
 
         private fun popupMenus(v:View) {
@@ -37,7 +40,7 @@ class UserAdapter(val c:Context,val userList:ArrayList<UserData>):RecyclerView.A
                                     dialog,_->
                                 position.userName = name.text.toString()
                                 notifyDataSetChanged()
-                                Toast.makeText(c,"User Information is Edited",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(c,"Text is Edited",Toast.LENGTH_SHORT).show()
                                 dialog.dismiss()
                             }
                             .setNegativeButton("Cancel"){
@@ -49,16 +52,17 @@ class UserAdapter(val c:Context,val userList:ArrayList<UserData>):RecyclerView.A
 
                         true
                     }
+
                     R.id.delete->{
                         AlertDialog.Builder(c)
                             .setTitle("Delete")
                             .setIcon(R.drawable.ic_warning)
-                            .setMessage("Are you sure delete this Information")
+                            .setMessage("Are you sure you want to delete this?")
                             .setPositiveButton("Yes"){
                                     dialog,_->
                                 userList.removeAt(adapterPosition)
                                 notifyDataSetChanged()
-                                Toast.makeText(c,"Deleted this Information",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(c,"Deleted",Toast.LENGTH_SHORT).show()
                                 dialog.dismiss()
                             }
                             .setNegativeButton("No"){
